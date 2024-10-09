@@ -1,0 +1,79 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
+        int n = arr1.size();
+        int m = arr2.size();
+
+       
+        if (n > m) return kthElement(k, arr2, arr1);
+
+        int low = std::max(0, k - m);
+        int high = std::min(k, n);
+
+        while (low <= high) {
+            int partitionArr1 = (low + high) / 2;
+            int partitionArr2 = k - partitionArr1;
+
+            int maxLeftArr1 = (partitionArr1 == 0) ? INT_MIN : arr1[partitionArr1 - 1];
+            int minRightArr1 = (partitionArr1 == n) ? INT_MAX : arr1[partitionArr1];
+
+            int maxLeftArr2 = (partitionArr2 == 0) ? INT_MIN : arr2[partitionArr2 - 1];
+            int minRightArr2 = (partitionArr2 == m) ? INT_MAX : arr2[partitionArr2];
+
+            if (maxLeftArr1 <= minRightArr2 && maxLeftArr2 <= minRightArr1) {
+                return std::max(maxLeftArr1, maxLeftArr2);
+            } else if (maxLeftArr1 > minRightArr2) {
+                high = partitionArr1 - 1;
+            } else {
+                low = partitionArr1 + 1;
+            }
+        }
+        
+        return -1; 
+    }
+};
+
+
+//{ Driver Code Starts.
+
+// Driver code
+int main() {
+    int t;
+    cin >> t;
+    cin.ignore();
+    while (t--) {
+        int n, m, k;
+        cin >> k;
+        cin.ignore();
+        string input;
+        int num;
+        vector<int> arr1, arr2;
+
+        getline(cin, input);
+        stringstream s2(input);
+        while (s2 >> num) {
+            arr1.push_back(num);
+        }
+
+        getline(cin, input);
+        stringstream s3(input);
+        while (s3 >> num) {
+            arr2.push_back(num);
+        }
+
+        Solution ob;
+        cout << ob.kthElement(k, arr1, arr2) << endl;
+    }
+    return 0;
+}
+// } Driver Code Ends
