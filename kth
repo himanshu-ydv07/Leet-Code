@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+ 
+int main()
+ 
+{	int t; cin>>t;
+while(t--){
+	ll n,k;cin>>n>>k;
+	ll low=1;
+	ll high=1e10;
+	ll ans=0;
+	while(low<=high){
+		ll mid=(low+high)/2;
+		ll val=mid-(mid/n);
+		if(val<k){
+		low=mid+1;
+		}
+	
+		else{
+            ans=mid;
+			high=mid-1;
+		}
+	}
+	
+	cout<<ans<<endl;
+}
+	
+}
