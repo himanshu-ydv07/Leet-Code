@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    void canReduceToOneElement(int t, vector<vector<int>>& testCases) {
+        for (int i = 0; i < t; i++) {
+            int n = testCases[i].size();
+            vector<int>& a = testCases[i];
+
+            sort(a.begin(), a.end());  // Sort the array to easily check the difference
+            if (a[n - 1] - a[0] > 1) {
+                cout << "NO" << endl;
+            } else {
+                cout << "YES" << endl;
+            }
+        }
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+    vector<vector<int>> testCases(t);
+
+    for (int i = 0; i < t; i++) {
+        int n;
+        cin >> n;
+        testCases[i].resize(n);
+        for (int j = 0; j < n; j++) {
+            cin >> testCases[i][j];
+        }
+    }
+
+    Solution solution;
+    solution.canReduceToOneElement(t, testCases);
+
+    return 0;
+}
