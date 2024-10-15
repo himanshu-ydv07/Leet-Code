@@ -1,0 +1,20 @@
+#include <iostream>
+#include <set>
+using namespace std;
+
+int main() {
+    int s1, s2, s3, s4;
+    // Read input
+    cin >> s1 >> s2 >> s3 >> s4;
+
+    // Use a set to find unique colors
+    set<int> unique_colors = {s1, s2, s3, s4};
+
+    // Calculate the number of horseshoes to buy
+    int num_to_buy = 4 - unique_colors.size();
+
+    // Print the result
+    cout << num_to_buy << endl;
+
+    return 0;
+}
