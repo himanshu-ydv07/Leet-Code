@@ -1,0 +1,32 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Solution {
+  public:
+    string xorBinaryStrings(string a, string b) {
+        string result = "";
+        for (size_t i = 0; i < a.length(); i++) {
+            // XOR logic: if digits differ, append '1', otherwise append '0'
+            if (a[i] != b[i]) {
+                result += '1';
+            } else {
+                result += '0';
+            }
+        }
+        return result;
+    }
+};
+
+int main() {
+    Solution sol;
+    
+    string a, b;
+    // Input the two binary strings
+    cin >> a >> b;
+
+    // Output the XORed result
+    cout << sol.xorBinaryStrings(a, b) << endl;
+
+    return 0;
+}
