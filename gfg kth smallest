@@ -1,0 +1,45 @@
+#include <vector>
+#include <algorithm> // For std::swap
+using namespace std;
+
+class Solution {
+public:
+    // arr : given array
+    // k : find kth smallest element and return using this function
+    int kthSmallest(vector<int> &arr, int k) {
+        return quickSelect(arr, 0, arr.size() - 1, k - 1);
+    }
+
+private:
+    int quickSelect(vector<int>& arr, int left, int right, int k) {
+        if (left == right) {
+            return arr[left]; // Only one element
+        }
+
+        // Randomly choose a pivot index
+        int pivotIndex = partition(arr, left, right);
+        
+        // The pivot is in its final sorted position
+        if (k == pivotIndex) {
+            return arr[k];
+        } else if (k < pivotIndex) {
+            return quickSelect(arr, left, pivotIndex - 1, k);
+        } else {
+            return quickSelect(arr, pivotIndex + 1, right, k);
+        }
+    }
+
+    int partition(vector<int>& arr, int left, int right) {
+        int pivot = arr[right]; // Choose the rightmost element as pivot
+        int i = left; // Place for the smaller element
+        
+        for (int j = left; j < right; j++) {
+            if (arr[j] < pivot) {
+                swap(arr[i], arr[j]);
+                i++;
+            }
+        }
+        swap(arr[i], arr[right]); // Place the pivot in the correct position
+        return i; // Return the pivot index
+    }
+};
