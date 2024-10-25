@@ -1,0 +1,26 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> welfare(n);
+    
+    for (int i = 0; i < n; i++) {
+        cin >> welfare[i];
+    }
+    
+    // Step 1: Find the maximum welfare among the citizens
+    int max_welfare = *max_element(welfare.begin(), welfare.end());
+    
+    // Step 2: Calculate the total cost to bring everyone up to max_welfare
+    int total_cost = 0;
+    for (int i = 0; i < n; i++) {
+        total_cost += max_welfare - welfare[i];
+    }
+    
+    cout << total_cost << endl;
+    return 0;
+}
