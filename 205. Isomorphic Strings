@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        if (s.length() != t.length()) return false;
+        
+        unordered_map<char, char> map_s_to_t;
+        unordered_map<char, char> map_t_to_s;
+        
+        for (int i = 0; i < s.length(); i++) {
+            char c_s = s[i];
+            char c_t = t[i];
+    
+            if (map_s_to_t.count(c_s)) {
+                if (map_s_to_t[c_s] != c_t) return false;
+            } else {
+                map_s_to_t[c_s] = c_t;
+            }
+            if (map_t_to_s.count(c_t)) {
+                if (map_t_to_s[c_t] != c_s) return false;
+            } else {
+                map_t_to_s[c_t] = c_s;
+            }
+        }
+        
+        return true;
+    }
+};
