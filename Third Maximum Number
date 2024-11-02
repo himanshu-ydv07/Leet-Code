@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        
+        set<int> unique_nums(nums.begin(), nums.end());
+        if (unique_nums.size() < 3) {
+            return *max_element(unique_nums.begin(), unique_nums.end());
+        }
+        unique_nums.erase(--unique_nums.end());
+        unique_nums.erase(--unique_nums.end());
+        
+        return *unique_nums.rbegin();
+    }
+};
